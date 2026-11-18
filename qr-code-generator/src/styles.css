@@ -1,0 +1,209 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #efe8dc;
+  --color-surface: #fffdf9;
+  --color-ink: #1f1a14;
+  --color-muted: #5c564c;
+  --color-seal: #9d1c14;
+  --color-seal-hover: #841610;
+  --color-seal-ink: #fff7f4;
+  --color-seal-soft: #f8ebe6;
+  --color-line: #e4d9cc;
+  --color-well: #f3ece3;
+  --font-sans: "Noto Sans SC", "Liberation Sans", "WenQuanYi Zen Hei", system-ui, sans-serif;
+  --font-display: "Noto Serif SC", "Liberation Serif", "WenQuanYi Zen Hei", serif;
+  --shadow-card:
+    0px 0px 0px 1px rgba(31, 26, 20, 0.06),
+    0px 1px 2px -1px rgba(31, 26, 20, 0.06),
+    0px 16px 40px -20px rgba(31, 26, 20, 0.28);
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    line-height: 1.5;
+  }
+
+  h1,
+  h2 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  ::selection {
+    background: #f0c9c2;
+    color: var(--color-ink);
+  }
+}
+
+@layer components {
+  .field {
+    width: 100%;
+    border-radius: 0.75rem;
+    border: 1px solid var(--color-line);
+    background: var(--color-surface);
+    color: var(--color-ink);
+    padding: 0.75rem 1rem;
+    font: inherit;
+    line-height: 1.5;
+  }
+
+  .field::placeholder {
+    color: var(--color-muted);
+  }
+
+  .field:focus-visible {
+    outline: 2px solid var(--color-seal);
+    outline-offset: 2px;
+  }
+
+  .field[aria-invalid="true"] {
+    border-color: var(--color-seal);
+  }
+
+  textarea.field {
+    min-height: 8.5rem;
+    resize: vertical;
+  }
+
+  input[type="color"].swatch {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0.25rem;
+    flex: none;
+    border-radius: 0.75rem;
+    border: 1px solid var(--color-line);
+    background: var(--color-surface);
+  }
+
+  input[type="color"].swatch::-webkit-color-swatch-wrapper {
+    padding: 0;
+  }
+
+  input[type="color"].swatch::-webkit-color-swatch {
+    border: none;
+    border-radius: 0.4rem;
+  }
+
+  input[type="color"].swatch:focus-visible {
+    outline: 2px solid var(--color-seal);
+    outline-offset: 2px;
+  }
+
+  input[type="range"].size-range {
+    accent-color: var(--color-seal);
+    width: 100%;
+    height: 2.75rem;
+  }
+
+  input[type="range"].size-range:focus-visible {
+    outline: 2px solid var(--color-seal);
+    outline-offset: 2px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    padding: 0.5rem 1rem;
+    border: 0;
+    border-radius: 0.75rem;
+    font: inherit;
+    font-weight: 600;
+    transition:
+      scale 150ms ease-out,
+      background-color 150ms ease-out;
+  }
+
+  .btn:focus-visible {
+    outline: 2px solid var(--color-seal);
+    outline-offset: 2px;
+  }
+
+  .btn:active:not(:disabled) {
+    scale: 0.96;
+  }
+
+  .btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+  }
+
+  .btn-primary {
+    width: 100%;
+    background: var(--color-seal);
+    color: var(--color-seal-ink);
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    background: var(--color-seal-hover);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--color-ink);
+    padding-inline: 0.75rem;
+  }
+
+  .btn-ghost:hover:not(:disabled) {
+    background: var(--color-well);
+  }
+
+  .choice {
+    display: flex;
+    min-height: 4.25rem;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.125rem;
+    border-radius: 0.75rem;
+    border: 1px solid var(--color-line);
+    background: var(--color-surface);
+    padding: 0.5rem 0.75rem;
+  }
+
+  .choice:has(:focus-visible) {
+    outline: 2px solid var(--color-seal);
+    outline-offset: 2px;
+  }
+
+  .choice:has(:checked) {
+    border-color: var(--color-seal);
+    background: var(--color-seal-soft);
+  }
+
+  .qr-bitmap {
+    width: min(100%, var(--qr-px));
+    height: auto;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
